@@ -32,7 +32,6 @@ func loadPage(title string) (*Page, error) {
 
 // Allows users to view a wiki page
 func viewHandler(w http.ResponseWriter, r *http.Request, title string) {
-	// if page doesnt exist make a new empty one
 	p, err := loadPage(title)
 	if err != nil {
 		http.Redirect(w, r, "/edit/"+title, http.StatusFound)
@@ -41,6 +40,7 @@ func viewHandler(w http.ResponseWriter, r *http.Request, title string) {
 	renderTemplate(w, "view", p)
 }
 
+// Allows users to edit/ make a new wiki page
 func editHandler(w http.ResponseWriter, r *http.Request, title string) {
 	p, err := loadPage(title)
 	if err != nil {
